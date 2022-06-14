@@ -4,11 +4,6 @@ from dotenv import load_dotenv
 from pytimeparse import parse
 
 
-TG_TOKEN = os.environ['TELEGRAM_TOKEN']  # подставьте свой ключ API
-TG_ID = os.environ['TG_CHAT_ID']  # подставьте свой ID
-bot = ptbot.Bot(TG_TOKEN)
-
-
 def reply(chat_id, total_time):
     message_id = bot.send_message(chat_id, "Запуск таймера")
     bot.create_countdown(parse(total_time), notify_progress, chat_id=chat_id, message_id=message_id,
@@ -31,13 +26,14 @@ def render_progressbar(total, iteration, prefix='', suffix='', length=30, fill='
     return '{0} |{1}| {2}% {3}'.format(prefix, pbar, percent, suffix)
 
 
-def main():
-  load_dotenv()
-  bot.send_message(TG_ID, "Бот запущен")
-  bot.send_message(TG_ID, "Введите время")
-  bot.reply_on_message(reply)
-  bot.run_bot()
-
-
 if __name__ == '__main__':
-  main()
+    load_dotenv()
+    tg_token = os.environ['TELEGRAM_TOKEN']  # подставьте свой ключ API
+    tg_id = os.environ['TG_CHAT_ID']  # подставьте свой ID
+    bot = ptbot.Bot(tg_token)
+    bot.send_message(tg_id, "Бот запущен")
+    bot.send_message(tg_id, "Введите время")
+    bot.reply_on_message(reply)
+    bot.run_bot()
+
+
