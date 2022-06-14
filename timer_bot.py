@@ -32,12 +32,12 @@ def render_progressbar(total, iteration, prefix='', suffix='', length=30, fill='
 
 
 def main():
-  reply()
-
-
-if __name__ == '__main__':
   load_dotenv()
   bot.send_message(TG_ID, "Бот запущен")
   bot.send_message(TG_ID, "Введите время")
   bot.reply_on_message(reply)
   bot.run_bot()
+
+
+if __name__ == '__main__':
+  main()
